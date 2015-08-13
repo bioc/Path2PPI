@@ -1,0 +1,16 @@
+Path2PPI v0.99.3 (Aug 10, 2015):
+- Add exportPattern()
+- Removed generating function "Path2PPI"
+- Minor changes in end-user messages
+- Minor changes in package vignette
+
+Path2PPI v0.99.2 (Aug 7, 2015):
+- NAMESPACE file: Removed helper functions and exportPattern() line
+- Package vignette: Added sessionInfo(), further explanations for test
+data set "ai" and some other minor changes. Applied BiocStyle.
+- Path2PPI.Rd file: minor changes
+- Adapted end-user messages
+- Created generating function for Path2PPI-objects and corresponding Rd-file.
+
+Path2PPI v0.99.1 (Aug 5, 2015):
+- Changed maintainer's email adress

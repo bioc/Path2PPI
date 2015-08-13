@@ -1,0 +1,18 @@
+exportPattern("^[[:alpha:]]+")
+exportMethods(
+    "addReference",
+    "getHybridNetwork",
+    "getPPI",
+    "plot.Path2PPI",
+    "predictPPI",
+    "removeReference",
+    "showInteraction",
+    "showReferences"
+)
+S3method(plot, Path2PPI)
+exportClasses(
+    "Path2PPI" 
+)
+export(homologyScore)
+import(igraph,methods)
+
