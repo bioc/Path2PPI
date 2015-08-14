@@ -103,31 +103,34 @@ setMethod(".getInteractions", ".ReferenceSpecies",
                 
                 #Now translate to interaction list and add to interactions
                 all.complexes <- unique(as.character(complexes$A.accession))
+                
                 for (a in 1:length(all.complexes)) {
                   temp.complexes <- 
                     complexes[complexes$A.accession == all.complexes[a],]
-                  combinations <- 
-                    t(combn(as.character(temp.complexes$B.accession),2))
-                  temp.complex.df <- data.frame(ref=temp.complexes$ref[1],
+                  if (nrow(temp.complexes)>1) {
+                    combinations <- 
+                      t(combn(as.character(temp.complexes$B.accession),2))
+                      temp.complex.df <- data.frame(ref=temp.complexes$ref[1],
                                                 A.db="",
                                                 A.accession=combinations[,1],
                                                 A.in.prot.list=FALSE,B.db="",
                                                 B.accession=combinations[,2],
                                                 B.in.prot.list=NA,
                                                 stringsAsFactors=FALSE)
-                  for (b in 1:nrow(temp.complexes)) {
-                    fill <- temp.complexes[b, c("B.db", "B.in.prot.list")]
-                    fill[, 1] <- as.character(fill[, 1])
-                    temp.complex.df[which(temp.complex.df$A.accession ==
-                                            temp.complexes$B.accession[b]),
-                                    c("A.db", "A.in.prot.list")] <- fill
-                    temp.complex.df[which(temp.complex.df$B.accession ==
-                                            temp.complexes$B.accession[b]),
-                                    c("B.db", "B.in.prot.list")] <- fill
-                  }
+                      for (b in 1:nrow(temp.complexes)) {
+                         fill <- temp.complexes[b, c("B.db", "B.in.prot.list")]
+                         fill[, 1] <- as.character(fill[, 1])
+                         temp.complex.df[which(temp.complex.df$A.accession ==
+                                               temp.complexes$B.accession[b]),
+                                        c("A.db", "A.in.prot.list")] <- fill
+                         temp.complex.df[which(temp.complex.df$B.accession ==
+                                               temp.complexes$B.accession[b]),
+                                        c("B.db", "B.in.prot.list")] <- fill
+                      }
                   
-                  temp.complex.df$complex <- TRUE
-                  interactions <- rbind(interactions, temp.complex.df)
+                      temp.complex.df$complex <- TRUE
+                      interactions <- rbind(interactions, temp.complex.df)
+                  }
                 }
               }
               

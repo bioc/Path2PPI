@@ -100,9 +100,13 @@ setMethod("show",
               hybrid <- getHybridNetwork(object)
               n.predicted <- 
                 which(hybrid$t.species.id==.getTaxId(object@targetSpecies))
+              proteins.n <- 
+                length(unique(c(hybrid[n.predicted,1],hybrid[n.predicted,2])))
+              
               hybrid <- hybrid[-n.predicted,]
               n.predicted <- length(n.predicted)
               r.species <- unique(hybrid$t.species.id)
+              cat("Number of predicted proteins: ",proteins.n,"\n",sep="")
               cat("Number of predicted interactions: ",n.predicted,"\n",sep="")
               cat("Predicted PPI based on ",
                   .countSpecies(object@referenceContainer),

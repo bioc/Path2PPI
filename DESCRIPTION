@@ -2,25 +2,29 @@ Package: Path2PPI
 Type: Package
 Title: Prediction of pathway-specific protein-protein interaction
         networks
-Version: 0.99.3
-Date: 2015-08-10
-Authors@R: c( person("Oliver", "Philipp", email =
-        "o.philipp@bioinformatik.uni-frankfurt.de", role =
-        c("aut","cre")), person("Ina", "Koch", role = "ctb") )
+Version: 0.99.4
+Date: 2015-08-14
+Authors@R: c(
+    person("Oliver", "Philipp", 
+    email = "o.philipp@bioinformatik.uni-frankfurt.de", 
+    role = c("aut","cre")),
+    person("Ina", "Koch", role = "ctb")
+    )
 Maintainer: Oliver Philipp <o.philipp@bioinformatik.uni-frankfurt.de>
-Description: Package to predict pathway specific protein-protein
-        interaction (PPI) networks in target organisms for which only a
-        view information about PPIs is available. Path2PPI uses PPIs of
-        the pathway of interest from other well established model
-        organisms to predict a certain pathway in the target organism.
-        Path2PPI only depends on the sequence similarity of the
-        involved proteins.
+Description: Package to predict pathway specific protein-protein interaction 
+    (PPI) networks in target organisms for which only a view information about 
+    PPIs is available. Path2PPI uses PPIs of the pathway of interest from other 
+    well established model organisms to predict a certain pathway in the target 
+    organism. Path2PPI only depends on the sequence similarity of the involved 
+    proteins.
 License: GPL (>= 2)
 URL: http://www.bioinformatik.uni-frankfurt.de/
 Depends: R (>= 3.2.1), igraph (>= 1.0.1), methods
 Suggests: knitr, rmarkdown, RUnit, BiocGenerics, BiocStyle
 VignetteBuilder: knitr
-Author: Oliver Philipp [aut, cre], Ina Koch Andrew [ctb]
+Author: Oliver Philipp [aut, cre],
+  Ina Koch [ctb]
 biocViews: NetworkInference, SystemsBiology, Network, Proteomics,
         Pathways
 NeedsCompilation: no
+Packaged: 2015-08-14 22:22:28 UTC; Oliver

@@ -1,3 +1,9 @@
+Path2PPI v0.99.4 (-----):
+- Bugfix: .getInteractions->combn only if n>=m
+- Additional information for show-Method of PPI-object: 
+Number of predicted proteins
+- DESCRIPTION file: correction of author field
+
 Path2PPI v0.99.3 (Aug 10, 2015):
 - Add exportPattern()
 - Removed generating function "Path2PPI"
