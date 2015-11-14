@@ -1,12 +1,12 @@
 ---
-title: "The Path2PPI package"
+title: "Path2PPI - Tutorial, example and the algorithm"
 author: "Oliver Philipp and Ina Koch 
   (MolBI-software@bioinformatik.uni-frankfurt.de)"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   BiocStyle::html_document:
     toc: true
-subtitle: A brief tutorial
+subtitle: Prediction of autophagy induction in _Podospora anserina_
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{Path2PPI - A brief tutorial}
@@ -30,14 +30,15 @@ biological data (functional annotation, co-expression etc.) which often are
 not available for many "less established" organisms, for example, where only 
 sequence data is available. In addition, it is of major interest to get 
 knowledge about a certain pathway in such a "less-studied" 
-organism. To overcome these drawbacks **Path2PPI** predicts a certain pathway 
-of interest in one organism by using and combining the PPIs of this pathway 
-in other well established model organisms.
+organism. To overcome these drawbacks **Path2PPI** can be used to predict 
+proteins and interactions of a certain pathway of interest in a target  
+organism by using and combining the PPIs of other well established model 
+organisms.
 
 To do so, it needs a list of proteins of interest from each reference species 
 and the result files produced by the local NCBI BLAST (Camacho et al., 2009) 
-tool (see next chapter). The relevant interactions, based on the 
-users' protein lists, are automatically extracted from the corresponding 
+tool (see next chapter). The relevant interactions based on the 
+users' protein lists are automatically extracted from the corresponding 
 _iRefIndex_ files (Razick et al., 2008).
 
 # Preparation of the data
@@ -66,7 +67,7 @@ data frames *"pa2human.ai.homologs"* and *"pa2yeast.ai.homologs"*
 (we describe this in more detail in section 2.2).
 
 If you want to use **Path2PPI** for your own demands, you have to 
-generate and prepare the necessary data files, accordingly.
+generate and prepare the necessary data files.
 
 ## Proteins and interactions of pathways of interest
 
@@ -342,6 +343,7 @@ relationship between a protein of the target species and a reference species.
 Only those proteins and interactions of the reference species are shown which 
 actually led to an interaction in the target species.
 
+
 ## Get detailed information about each interaction
 After we know how the predicted PPI network of this pathway may look 
 like in the target species we want to know more about the predicted 
@@ -356,7 +358,7 @@ use the additional argument `mode`:
 showInteraction(ppi,interaction=c("B2AT71","B2AE79"),mode="detailed",
                 verbose=FALSE)
 ```
-This data frame contains each single predicted interactions of the current 
+This data frame contains each single predicted interaction of the current 
 interaction and all corresponding reference interactions. For the interaction 
 of the proteins in columns one and two, the third column gives the prediction 
 score.
@@ -380,7 +382,7 @@ the _iRefIndex_ table which contains all information about the current
 reference interactions. We can use this data frame with default R 
 functionality to search for specific information of the reference 
 interactions. For example, if we want to know from which study (author and 
-publication) and from which data base the interaction of the proteins "P42345" 
+publication) and from which database the interaction of the proteins "P42345" 
 and "P42345" with the interaction identifier "742389" (first row) was adopted, 
 we use:
 
@@ -390,6 +392,7 @@ ref.interaction[ref.interaction$irigid=="742389",
 ```
 In this manner you are able to search for each entry provided by the 
 _iRefIndex_ table.
+
 
 ## Export results
 
@@ -421,12 +424,18 @@ R functions like `write.table`.
 
 Camacho, C. et al. (2009). BLAST+: architecture and applications. BMC 
 Bioinformatics, 10(1), 421.  
+
 Cline, M. S. et al. (2007). Integration of biological networks and gene 
-expression data using Cytoscape. Nature Protocols, 2(10), 2366–2382.  
+expression data using Cytoscape. Nature Protocols, 2(10), 2366-2382.
+
 Csardi, G. and Nepusz, T. (2006). The igraph software package for complex 
-network research. InterJournal Complex Systems, 1695(5), 1–9.  
+network research. InterJournal Complex Systems, 1695(5), 1-9
+
 Razick, S. et al. (2008). iRefIndex: a consolidated protein interaction 
-database with provenance. BMC Bioinformatics, 9(1), 405.  
+database with provenance. BMC Bioinformatics, 9(1), 405.
+
+Kanehisa, M. et al. (2014). Data, information, knowledge and principle: back to
+metabolism in KEGG. Nucleic Acids Research, 42(D1), D199-D205.
 
 
 # Session info
@@ -435,42 +444,76 @@ database with provenance. BMC Bioinformatics, 9(1), 405.
 sessionInfo()
 ```
 
-
 # Appendix
+
+
+## Biological evidence of the predicted PPI network
+
+The example of autophagy induction was choosen, since it is well known and 
+described for many eukaryotic organisms, including yeast, human and even 
+_P. anserina_. Representatively and briefly described for yeast, the 
+induction step works as follows:
+
+Generally, nutrient availability activates the TOR-kinase, which phosphorylates
+ATG13. Hyper-phosphorylated ATG13 cannot interact with ATG1 and ATG17 to build 
+the ATG1 complex (including ATG11 and VAC8) , which is important for 
+autophagosome nucleation. Hence, autophagy is inhibited. In contrast, under 
+nutrient-depleted conditions, TOR is deactivated, ATG13 is dephosphorylated and 
+available for complex formation with ATG1 and ATG17. The next step of the 
+autophagy process - autophagosome nucleation - can begin.
+
+As reference proteins we used those provided by the KEGG database 
+(Kanehisa et al., 2014) for yeast (seven) and human (five). We compared 
+the predicted PPI with that provided by the KEGG database for _P. anserina_.
+
+We found that two of the five proteins of human, ULK1 and TOR, and all of the 
+seven proteins of yeast have been taken into account from the algorithm.
+This is due to the closer evolutionary distance of the both fungi and the
+corresponding proteins.
+The alogrithm predicts all of the proteins and interactions provided by the 
+KEGG database for the induction step of autophagy in _P. anserina_.
+Additionally, it also includes two additional proteins, which are not 
+characterized yet. This is propably due to the fact that these two proteins
+are putative serine/threonine kinases with similar motifs and sequences like
+the TOR kinase.
+
+Summarizing, this example shows that **Path2PPI** is able to transfer 
+interaction data amongst organisms. The resulting PPI networks can serve as
+starting points for further analyses and PPI studies.
+
 
 
 ## The prediction algorithm
 
 **Aim:**
-We aim to predict a pathway-specific interaction network in the target
-organism based on the interaction networks of well established model 
-organisms. We consider the degree of homologies and the number of reference 
+We aim to predict an interaction network in a target organism based on the 
+interaction networks of well established model organisms. The networks are 
+based on a predefined set of proteins which may belong to a certain pathway.
+We consider the degree of homologies and the number of reference 
 species.
 
 **Requirements:**
 The major initial requirements for the algorithm are the PPIs for each 
 reference species, the BLAST results of the target species (_P. anserina_) 
 against each reference species, and an E-value range defined by the upper 
-bound $h_u$ and the lower bound $h_l$. During the algorithm, the range is 
-required to map the BLAST E-value interval $[h_l ,h_u]$ to a homology score in 
-the interval $[1,0]$ where 0 is the worst and 1 the best value. 
+bound $h_u$ and the lower bound $h_l$. The range is required to map the BLAST 
+E-value interval $[h_l ,h_u]$ to a homology score in the interval $[1,0]$ 
+where 0 is the worst and 1 the best value. 
 We will exemplarily describe the algorithm based on the two reference 
 species, human and yeast.
 
-### Computing preliminary reference species-specific PPIs ###
+# Computing preliminary reference species-specific PPIs #
 
 
 ![Steps of the prediction algorithm](figures/algorithm.png)
-**Figure 1. Steps of the prediction algorithm** a) Searches for 
+**Figure 1. Steps of the prediction algorithm** a) It searches for 
 each interaction (blue edges) in each reference species (blue) the 
 corresponding homologs (dotted edges) in the target species (red). Each valid 
-homologous protein from the first set 
-($H_a$) will now be connected with each homologous protein from the other set 
-($H_b$). The deduced interactions are scored, using the function described 
-below. b) The linear function to map the BLAST E-values to the interval 
-$[0,1]$. c) Combining the redundantly predicted interactions to one final PPI 
-network, $PPI_p$, of the target species.  
-  
+homologous protein from the first set, $H_a$, will now be connected with each 
+homologous protein from the other set, $H_b$. The deduced interactions are 
+scored, using the function described below. b) The linear function to map the 
+BLAST E-values to the interval $[0,1]$. c) Combining the redundantly predicted 
+interactions to one final PPI network, $PPI_p$, of the target species.  
   
 At the beginning, we have the (undirected) PPI graphs of human 
 $PPI_h=(V_h,E_h)$ and yeast $PPI_y=(V_y,E_y)$ (figure 1a, the blue graph 
@@ -479,23 +522,37 @@ represents all _P. anserina_ proteins (figure 1a, red nodes) and an empty
 preliminary PPI graph of _P. anserina_ $PPI_{pre}=(V_p,E_p )=\emptyset$. 
 The homology comparing approach leads to a directed homology graph
 
-$H=(V_H,E_H)$
+$H=(V_H,E_H)$ where
 
-where
-
-$V_H \subseteq (V_h \cup V_y \cup V_p)$
-
-and
+$V_H \subseteq (V_h \cup V_y \cup V_p)$ and
 
 $E_H \subseteq \{ (a,b) \mid a \in V_p,b \in (V_y \cup V_h) \}$.
 
 Each edge in $H$ is weighted by the E-values ($EV$) of the BLAST search. 
-Before starting the algorithm we have to set an upper and lower bound for 
-the E-values to define a range $[h_l,h_u]$ which will be mapped to the 
-interval $[0,1]$ (figure 1b).
-The PPIs of each reference species are handled separately. Each interaction 
-of each reference species is handled one by one. We start with the first 
-reference species (here, $PPI_h$):
+
+Before starting the algorithm we have to set three major parameters. First, the 
+parameter $e_{thresh}$, which defines a threshold for the E-values. 
+Homologous relations which exceed that theshold are immeditely declined and 
+will not be taken into account anymore. The second and third parameters are 
+the upper and the lower bound for an E-value range $[h_l,h_u]$, where 
+$h_l < h_u \le e_{thresh}$ which will be 
+mapped to the interval $[1,0]$ by the scoring function $s$ where $1$ is the 
+best score and $0$ the worst (figure 1b). Since generally, homology-based 
+network inference has to consider that that more homologous proteins 
+exist, we aim to distinguish and weight these relations by 
+different scores provided by the scoring function. If only one homologous 
+relationship exists, the scoring function will lead to the best score of 1, 
+as well. This exception is due to the unambigous and desired situation if only 
+one protein in the target species is homologous to the corresponding protein in 
+the reference species. 
+
+Each interaction of each reference species is handled one by one and 
+contributes to the prediction and scoring with an equal weight of $1$, i.e. 
+we do not distinguish between the underlying experimental methods. 
+Furthermore, it is assumed that interactions and the reference species are 
+stochastically independent, i.e. the occurance of one interaction does not 
+influence the probality of the occurence of another interaction.
+We start with the first reference species, here, $PPI_h$:
 
 For each $e_h= \{ a_h,b_h \} \in E_h$ (figure 1a, vertices $a_h$ and $b_h$):
 
@@ -503,12 +560,16 @@ For each $e_h= \{ a_h,b_h \} \in E_h$ (figure 1a, vertices $a_h$ and $b_h$):
 $e_a = \{ (a_{ea},b_{ea} ) \mid a_{ea},b_{ea} \in V_H , b_{ea}=a_h \}$ and 
 $H_b \subseteq H$ with each 
 $e_b= \{ (a_{eb},b_{eb}) \mid a_{eb},b_{eb} \in V,b_{eb}=b_h \}$ 
-(figure 1a, dotted edges to set $H_a$ or set $H_b$)
+(figure 1a, dotted edges pointing to set $H_a$ or set $H_b$)
 
-2. If $V(H_a)=\emptyset$ or $V(H_b)=\emptyset$, decline $e_h$, otherwise 
+2. _Predefinition: Given the graph $H$ and $V(H)$ gives the set of vertices 
+in $H$ and $E(H)$ the set of edges in $H$ then $\mid(V(H)\mid$ gives the number 
+of vertices in $H$ and $\mid(E(H)\mid$ the number of edges in $H$._
+
+    If $V(H_a)=\emptyset$ or $V(H_b)=\emptyset$, decline $e_h$, otherwise 
 compute the homology score $s_h \to [0,1]$ for each edge $e_a \in H_a$ and 
-each edge $e_b \in H_b$ based on the single E-values and the sizes of $H_a$ 
-and $H_b$:  
+each edge $e_b \in H_b$ based on the single E-values and the cardinalities
+of $H_a$ and $H_b$:  
   
     If $\mid(E(H_a)\mid =1$ then $s_h(e_a)=1$ else 
 $s_h(e_a) = \mid m log_{10}({EV}(e_a))+b \mid$,
@@ -524,7 +585,7 @@ $s_h(e_b) = \mid m log_{10}({EV}(e_b))+b \mid$
   
     $H_b = H_b \setminus \{(e_b \in H_b),s_h(e_b)=0\}$.
 
-4. Add each remaining node $\{v \in V(\{H_a \cup H_b\}) \wedge v \in V_p\}$ 
+4. Add each remaining vertex $\{v \in V(\{H_a \cup H_b\}) \wedge v \in V_p\}$ 
 from target species to ${PPI}_{pre}$ and connect each node deduced from set 
 $H_a$ with each node deduced from set $H_b$ (figure 1a, red edges). 
 Compute a score $s_i$ for each of these new predicted edges (interactions) 
@@ -537,7 +598,7 @@ threshold.
 
 Repeat step 1-4 with ${PPI}_y$ and each other reference species.
 
-### Combining PPIs deduced from each reference species ###
+# Combining PPIs deduced from each reference species #
 Now, the algorithm has to combine all predicted and probably redundant 
 interactions in ${PPI}_{pre}$ to one combined PPI of _P. anserina_, 
 ${PPI}_p = (V_p,E_p)$. In particular, it has to consider interactions which 
@@ -574,12 +635,11 @@ predicting all the same interaction in the target species with the scores
 $0.7$, $0.9$ and $0.6$. Then, the final species score is:  
 $s(0.6,0.7,0.9)=0.9+(1-0.9)*0.7+(1-(0.9+(1-0.9)*0.7))*0.6=0.988.$
 
-4. Combine the two intra species scores to one common inter species or final 
-score $i_{a,b}$ (figure 1c lower area):  
+4. Combine the two intra species scores to one common inter-species or 
+final-score $i_{a,b}$ (figure 1c lower area):  
 $i_{a,b}=\frac{s(S_h)+s(S_y)}{m}+m-1$, where $m$ is the number of reference 
 species for which the interaction $I_{a,b} \subseteq {PPI}_{pre}$ was found 
 (i.e. $m=1$, if only in yeast or human and $m=2$, if in both).
 
 5. Finally, add the new edge (interaction) $I_{a,b}$ to ${PPI}_p$ with the 
 score $i_{a,b}$.
-

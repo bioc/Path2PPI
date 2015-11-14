@@ -1,22 +1,40 @@
-Path2PPI v0.99.4 (-----):
-- Bugfix: .getInteractions->combn only if n>=m
-- Additional information for show-Method of PPI-object: 
-Number of predicted proteins
-- DESCRIPTION file: correction of author field
+CHANGES IN VERSION 1.1.1
+-------------------------
 
-Path2PPI v0.99.3 (Aug 10, 2015):
-- Add exportPattern()
-- Removed generating function "Path2PPI"
-- Minor changes in end-user messages
-- Minor changes in package vignette
+    o Changes in package titel and description
+    o Changes and additional explanations in the package vignette
 
-Path2PPI v0.99.2 (Aug 7, 2015):
-- NAMESPACE file: Removed helper functions and exportPattern() line
-- Package vignette: Added sessionInfo(), further explanations for test
-data set "ai" and some other minor changes. Applied BiocStyle.
-- Path2PPI.Rd file: minor changes
-- Adapted end-user messages
-- Created generating function for Path2PPI-objects and corresponding Rd-file.
+CHANGES IN VERSION 0.99.4
+-------------------------
 
-Path2PPI v0.99.1 (Aug 5, 2015):
-- Changed maintainer's email adress
+    o Additional information for show-Method of PPI-object: Number of predicted 
+      proteins
+    o DESCRIPTION file: correction of author field
+
+BUG FIXES
+
+    o .getInteractions->combn only if n>=m
+
+CHANGES IN VERSION 0.99.3
+-------------------------
+
+    o Add exportPattern()
+    o Removed generating function "Path2PPI"
+    o Minor changes in end-user messages
+    o Minor changes in package vignette
+
+CHANGES IN VERSION 0.99.2
+-------------------------
+
+    o NAMESPACE file: Removed helper functions and exportPattern() line
+    o Package vignette: Added sessionInfo(), further explanations for test 
+      data set "ai" and some other minor changes. Applied BiocStyle.
+    o Path2PPI.Rd file: minor changes
+    o Adapted end-user messages
+    o Created generating function for Path2PPI-objects and corresponding 
+      Rd-file.
+
+CHANGES IN VERSION 0.99.1
+-------------------------
+
+    o Changed maintainers' email address
