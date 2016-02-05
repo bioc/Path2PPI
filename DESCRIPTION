@@ -1,18 +1,20 @@
 Package: Path2PPI
 Type: Package
 Title: Prediction of pathway-related protein-protein interaction networks
-Version: 1.1.1
-Date: 2015-11-14
+Version: 1.1.2
+Date: 2016-02-05
 Authors@R: c(
     person("Oliver", "Philipp", 
-    email = "o.philipp@bioinformatik.uni-frankfurt.de", 
+    email = "contact@oliverphilipp.info", 
     role = c("aut","cre")),
-    person("Ina", "Koch", role = "ctb")
+    person("Ina", "Koch", 
+    email = "ina.koch@bioinformatik.uni-frankfurt.de", 
+    role = "ctb")
     )
-Maintainer: Oliver Philipp <o.philipp@bioinformatik.uni-frankfurt.de>
+Maintainer: Oliver Philipp <contact@oliverphilipp.info>
 Description: Package to predict protein-protein interaction (PPI) networks in 
     target organisms for which only a view information about 
-    PPIs is available. PATH2PPI predicts PPI networks based on sets of 
+    PPIs is available. Path2PPI predicts PPI networks based on sets of 
     proteins which can belong to a certain pathway from well-established model 
     organisms. It helps to combine and transfer information of a certain 
     pathway or biological process from several reference organisms to one 

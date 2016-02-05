@@ -502,8 +502,7 @@ where 0 is the worst and 1 the best value.
 We will exemplarily describe the algorithm based on the two reference 
 species, human and yeast.
 
-# Computing preliminary reference species-specific PPIs #
-
+### Computing preliminary reference species-specific PPIs ###
 
 ![Steps of the prediction algorithm](figures/algorithm.png)
 **Figure 1. Steps of the prediction algorithm** a) It searches for 
@@ -538,7 +537,7 @@ the upper and the lower bound for an E-value range $[h_l,h_u]$, where
 $h_l < h_u \le e_{thresh}$ which will be 
 mapped to the interval $[1,0]$ by the scoring function $s$ where $1$ is the 
 best score and $0$ the worst (figure 1b). Since generally, homology-based 
-network inference has to consider that that more homologous proteins 
+network inference has to consider that more homologous proteins 
 exist, we aim to distinguish and weight these relations by 
 different scores provided by the scoring function. If only one homologous 
 relationship exists, the scoring function will lead to the best score of 1, 
@@ -598,7 +597,8 @@ threshold.
 
 Repeat step 1-4 with ${PPI}_y$ and each other reference species.
 
-# Combining PPIs deduced from each reference species #
+### Combining PPIs deduced from each reference species ###
+
 Now, the algorithm has to combine all predicted and probably redundant 
 interactions in ${PPI}_{pre}$ to one combined PPI of _P. anserina_, 
 ${PPI}_p = (V_p,E_p)$. In particular, it has to consider interactions which 
