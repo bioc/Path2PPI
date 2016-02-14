@@ -1,0 +1,18 @@
+citHeader("To cite Path2PPI in publications use:")
+
+citEntry(entry = "Article",
+  title        = "Path2PPI: an R package to predict protein-protein interaction networks for a set of proteins",
+  author       = "Oliver Philipp, Heinz D. Osiewacz and Ina Koch",
+  journal      = "Bioinformatics",
+  year         = "2016",
+  volume       = "",
+  number       = "",
+  pages        = "",
+  issn         = "",
+  doi          = "10.1093/bioinformatics/btv765",
+  url          = "",
+  textVersion  =
+  paste("Oliver Philipp, Heinz D. Osiewacz and Ina Koch.",
+        "Path2PPI: an R package to predict protein-protein interaction networks for a set of proteins.",
+        "Bioinformatics, doi:10.1093/bioinformatics/btv765, 2016.")
+)
